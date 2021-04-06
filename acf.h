@@ -2,6 +2,8 @@
 #define ACF_H
 // класс автокорреляционной функции
 
+#include <iostream>
+
 class Acf
 {
 public:
@@ -16,7 +18,7 @@ public:
 
     // operators overloading
     Acf &operator= (const Acf &acf);
-
+    friend std::ostream &operator<< (std::ostream &out, const Acf &acf);
 
 private:
     int m_peakSideLobe {0}; // пиковый боковой лепесток

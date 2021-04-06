@@ -29,3 +29,11 @@ Acf &Acf::operator= (const Acf &acf)
     return *this;
 }
 
+std::ostream &operator<< (std::ostream &out, const Acf &acf)
+{
+    out << "acf(" << acf.m_peakSideLobe << ")";
+
+    return out;
+}
+
+
