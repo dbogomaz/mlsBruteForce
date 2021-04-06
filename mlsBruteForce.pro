@@ -4,4 +4,8 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
+        acf.cpp \
         main.cpp
+
+HEADERS += \
+    acf.h
