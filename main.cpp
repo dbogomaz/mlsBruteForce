@@ -36,6 +36,14 @@ ostream &operator<< (ostream &ostr, Config &cfg) {
     return ostr;
 };
 
+istream &operator>> (istream &istr, Config &cfg) {
+    istr >> cfg.num;
+    istr >> cfg.str;
+    istr >> cfg.flt;
+
+    return istr;
+};
+
 
 int main() {
     Config config;
@@ -44,6 +52,11 @@ int main() {
     cout << config.str << '\n';
     cout << config.flt << '\n';
 
+    cout << "-->";
+    cin >> config;
+
+
     cout << endl;
     cout << config << endl;
+
 }
