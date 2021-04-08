@@ -8,6 +8,7 @@ flt = 12.2
 #include <fstream>
 #include <sstream>
 #include <string>
+
 using namespace std;
 
 struct Config {
@@ -30,10 +31,19 @@ void loadConfig(Config& config) {
     }
 }
 
+ostream &operator<< (ostream &ostr, Config &cfg) {
+    ostr << cfg.num << "-" << cfg.str << "-" << cfg.flt;
+    return ostr;
+};
+
+
 int main() {
     Config config;
     loadConfig(config);
     cout << config.num << '\n';
     cout << config.str << '\n';
     cout << config.flt << '\n';
+
+    cout << endl;
+    cout << config << endl;
 }
