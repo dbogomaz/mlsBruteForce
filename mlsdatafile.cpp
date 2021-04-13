@@ -40,9 +40,16 @@ s MlsDataFile::readLastData() const
     const char separator = ' ';
     ifstream fin;
 
+    s r;
+
     fin.open(this->fullName());
 
-    s r;
+    if(!fin.is_open()) {
+        cout << "*****  ERROR !!! *****" << endl;
+        cout << "Не могу открыть файл " << this->fileName() << endl;
+        return r;
+    }
+
 
 //    string str = "";
 
