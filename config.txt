@@ -1,3 +1,0 @@
-num = 123
-str = hello
-flt = 12.2

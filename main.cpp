@@ -1,62 +1,42 @@
-/* File config.txt:
-num = 123
-str = hello
-flt = 12.2
-*/
-
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
 
+#include "mlsdatafile.h"
+
 using namespace std;
 
-struct Config {
-    int    num;
-    string str;
-    double flt;
-};
-
-void loadConfig(Config& config) {
-    ifstream fin("../config.txt");
-    string line;
-    while (getline(fin, line)) {
-        istringstream sin(line.substr(line.find("=") + 1));
-        if (line.find("num") != -1)
-            sin >> config.num;
-        else if (line.find("str") != -1)
-            sin >> config.str;
-        else if (line.find("flt") != -1)
-            sin >> config.flt;
-    }
-}
-
-ostream &operator<< (ostream &ostr, Config &cfg) {
-    ostr << cfg.num << "-" << cfg.str << "-" << cfg.flt;
-    return ostr;
-};
-
-istream &operator>> (istream &istr, Config &cfg) {
-    istr >> cfg.num;
-    istr >> cfg.str;
-    istr >> cfg.flt;
-
-    return istr;
-};
-
-
 int main() {
-    Config config;
-    loadConfig(config);
-    cout << config.num << '\n';
-    cout << config.str << '\n';
-    cout << config.flt << '\n';
 
-    cout << "-->";
-    cin >> config;
+    MlsDataFile *file = new MlsDataFile();
 
+    file->setFileName("name.txt");
+    file->setFilePath("../");
 
     cout << endl;
-    cout << config << endl;
+    cout << "************" << endl;
+    cout << file->fullName() << endl;
+    cout << endl;
 
+    s dd;
+//    dd.val1 = 5;
+//    dd.val2 = 0.5;
+//    dd.val3 = "ee5";
+
+//    file->writeData(dd);
+
+    cout << endl;
+    dd = file->readLastData();
+
+
+    cout << dd.val1 << " " <<
+            dd.val2 << " " <<
+            dd.val3;
+
+    cout << endl;
+
+    delete file;
+
+    return 0;
 }

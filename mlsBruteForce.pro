@@ -4,7 +4,10 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
-        main.cpp
+        main.cpp \
+        mlsdatafile.cpp
 
-DISTFILES += \
-    config.txt
+DISTFILES +=
+
+HEADERS += \
+    mlsdatafile.h
