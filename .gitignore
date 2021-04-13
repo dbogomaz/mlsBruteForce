@@ -1,3 +1,6 @@
+# My files
+.DS_Store
+
 # C++ objects and libs
 *.slo
 *.lo
@@ -67,4 +70,8 @@ compile_commands.json
 # Executables
 *.exe
 *.out
+<<<<<<< HEAD
 *.app
+=======
+*.app
+>>>>>>> Traning_save

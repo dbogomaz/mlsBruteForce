@@ -5,7 +5,11 @@ CONFIG -= qt
 
 SOURCES += \
         acf.cpp \
+        mlsdatafile.cpp \
         main.cpp
 
 HEADERS += \
-    acf.h
+    acf.h \
+    mlsdatafile.h
+
+DISTFILES +=
