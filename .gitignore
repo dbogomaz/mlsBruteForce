@@ -71,7 +71,11 @@ compile_commands.json
 *.exe
 *.out
 <<<<<<< HEAD
+<<<<<<< HEAD
 *.app
 =======
 *.app
 >>>>>>> Traning_save
+=======
+*.app
+>>>>>>> acf
