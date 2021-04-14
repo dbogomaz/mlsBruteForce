@@ -4,22 +4,14 @@
 #ifndef MLSDATAFILE_H
 #define MLSDATAFILE_H
 
-#include<iostream>
+#include <iostream>
 #include <fstream>
 #include <string>
-#include<vector>
-//#include<ostream>
+#include <vector>
+
+#include "mlsdata.h"
 
 using namespace std;
-
-struct s
-{
-    s() {}
-    int val1;
-    double val2;
-    string val3;
-};
-
 
 class MlsDataFile
 {
@@ -33,20 +25,22 @@ public:
     string fileName() const;
     string filePath() const;
     string fullName() const;
-    s readLastData() const;
+    MLSData readLastData();
 
     // setters
     void setFileName(const string &fileName);
     void setFilePath(const string &filePath);
-    void writeData(const s &data);
+    void writeData(const MLSData &data);
 
     // overload operations
     MlsDataFile &operator= (const MlsDataFile &mdf);
     //std::ostream &operator<< (std::ostream &osr, MlsDataFile &mdf);
 
 private:
-    string m_fileName {""};
-    string m_filePath {""};
+    string _fileName {""};
+    string _filePath {""};
+    const char _sep {' '}; // separator разделитель данных в файле (например пробел)
+    MLSData _data; // структура для хранения промежуточных данных (чтобы каждый раз при чтении память не выделять)
 
 };
 

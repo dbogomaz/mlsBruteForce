@@ -10,6 +10,7 @@ SOURCES += \
 
 HEADERS += \
     acf.h \
+    mlsdata.h \
     mlsdatafile.h
 
 DISTFILES +=

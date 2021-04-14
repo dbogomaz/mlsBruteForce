@@ -2,102 +2,98 @@
 
 // constutions
 MlsDataFile::MlsDataFile()
-    : m_fileName("")
-    , m_filePath("")
+    : _fileName("")
+    , _filePath("")
+    , _sep(' ')
 {
 
 }
 
 MlsDataFile::MlsDataFile(const MlsDataFile &mdf)
 {
-    m_fileName = mdf.fileName();
-    m_filePath = mdf.filePath();
+    _fileName = mdf.fileName();
+    _filePath = mdf.filePath();
 }
 
 MlsDataFile::~MlsDataFile()
 {
-    cout << "Деструктор " << this->fileName() << endl;
+//    cout << "Деструктор " << this->fileName() << endl;
 }
 
 // getters
 string MlsDataFile::fileName() const
 {
-    return m_fileName;
+    return _fileName;
 }
 
 string MlsDataFile::filePath() const
 {
-    return m_filePath;
+    return _filePath;
 }
 
 string MlsDataFile::fullName() const
 {
-    return m_filePath + m_fileName;
+    return _filePath + _fileName;
 }
 
-s MlsDataFile::readLastData() const
+MLSData MlsDataFile::readLastData()
 {
-    const char separator = ' ';
     ifstream fin;
-
-    s r;
 
     fin.open(this->fullName());
 
     if(!fin.is_open()) {
         cout << "*****  ERROR !!! *****" << endl;
         cout << "Не могу открыть файл " << this->fileName() << endl;
-        return r;
+        return _data;
     }
 
-
-//    string str = "";
-
     fin.seekg(-2, ios::end);
-
     while (true) {
+        char sym = fin.get(); // тоже сдвигает указатель на +1
         fin.seekg(-2, ios::cur);
-        char sym = fin.get();
-        if (sym == '\n') {
-//            getline(fin, str);
-            fin >> r.val1 >> r.val2 >> r.val3;
+        if (sym == '\n' || fin.tellg() == 0) {
+            if (sym == '\n') {
+                fin.seekg(1, ios::cur);
+            }
+            fin >> _data.init_seq >>
+                   _data.polynominal >>
+                   _data.length >>
+                   _data.sequence >>
+                   _data.acf >>
+                   _data.acf_peak_side_lobe;
             break;
         }
     }
 
-//    cout << r.val1 << separator <<
-//            r.val2 << separator <<
-//            r.val3 << endl;
-
     fin.close();
 
-    return r;
+    return _data;
 }
 
 
 // setters
 void MlsDataFile::setFileName(const string &fileName)
 {
-    m_fileName = fileName;
+    _fileName = fileName;
 }
 
 void MlsDataFile::setFilePath(const string &filePath)
 {
-    m_filePath = filePath;
+    _filePath = filePath;
 }
 
-void MlsDataFile::writeData(const s &data)
+void MlsDataFile::writeData(const MLSData &data)
 {
-    const char separator = ' ';
     ofstream fout;
     fout.open(this->fullName(), ios::app);
 
-//    for (auto val : data) {
-//        fout << val << " ";
-//    }
-    fout << data.val1 << separator <<
-            data.val2 << separator <<
-            data.val3 << '\n';
+    fout << data.init_seq           << _sep <<
+            data.polynominal        << _sep <<
+            data.length             << _sep <<
+            data.sequence           << _sep <<
+            data.acf                << _sep <<
+            data.acf_peak_side_lobe << '\n';
 
     fout.close();
 }
@@ -109,8 +105,8 @@ MlsDataFile &MlsDataFile::operator=(const MlsDataFile &mdf)
     if (this == &mdf) {
         return *this;
     }
-    m_fileName = mdf.fileName();
-    m_filePath = mdf.filePath();
+    _fileName = mdf.fileName();
+    _filePath = mdf.filePath();
 
     return *this;
 }
