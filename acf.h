@@ -5,6 +5,9 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
+
+typedef std::vector<int32_t> vec32_t;
 
 class Acf
 {
@@ -14,11 +17,11 @@ public:
     Acf(const Acf &acf);
 
     // getters
-    std::vector<int32_t> value() const;
-    int32_t peakSideLobe() const;
+    vec32_t value() const;
+    int32_t acf_peak_side_lobe() const;
 
     // setters
-    void setValue(const std::vector<int32_t> &value);
+    void setValue(const vec32_t &value);
 
     // operators overloading
     Acf &operator= (const Acf &acf);
@@ -26,8 +29,8 @@ public:
 
 
 private:
-    int32_t _peakSideLobe {0}; // пиковый боковой лепесток (уровень боковых лепестков)
-    std::vector<int32_t> _value; // значения АКФ
+    int32_t _acf_peak_side_lobe {0}; // пиковый боковой лепесток (уровень боковых лепестков)
+    vec32_t _value; // значения АКФ
 
 
 };

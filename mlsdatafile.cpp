@@ -60,7 +60,6 @@ MLSData MlsDataFile::readLastData()
                    _data.polynominal >>
                    _data.length >>
                    _data.sequence >>
-                   _data.acf >>
                    _data.acf_peak_side_lobe;
             break;
         }
@@ -92,7 +91,6 @@ void MlsDataFile::writeData(const MLSData &data)
             data.polynominal        << _sep <<
             data.length             << _sep <<
             data.sequence           << _sep <<
-            data.acf                << _sep <<
             data.acf_peak_side_lobe << '\n';
 
     fout.close();
