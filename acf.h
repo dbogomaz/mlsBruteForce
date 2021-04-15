@@ -18,7 +18,8 @@ public:
 
     // getters
     vec32_t value() const;
-    int32_t acf_peak_side_lobe() const;
+    double acfSideLobesRatio() const;
+    double meritFactor() const;
 
     // setters
     void setValue(const vec32_t &value);
@@ -27,11 +28,15 @@ public:
     Acf &operator= (const Acf &acf);
     friend std::ostream &operator<< (std::ostream &out, const Acf &acf);
 
+private:
+    void init(const Acf &acf);
+
+
 
 private:
-    int32_t _acf_peak_side_lobe {0}; // пиковый боковой лепесток (уровень боковых лепестков)
     vec32_t _value; // значения АКФ
-
+    double _acf_side_lobes_ratio {0.0}; // уровень боковых лепестков
+    double _merit_factor {0.0}; // отношение энергии главного лепестка к суммарной энергии всех боковых лепестков
 
 };
 

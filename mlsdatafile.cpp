@@ -2,8 +2,8 @@
 
 // constutions
 MlsDataFile::MlsDataFile()
-    : _fileName("")
-    , _filePath("")
+    : _file_name("")
+    , _file_path("")
     , _sep(' ')
 {
 
@@ -11,8 +11,8 @@ MlsDataFile::MlsDataFile()
 
 MlsDataFile::MlsDataFile(const MlsDataFile &mdf)
 {
-    _fileName = mdf.fileName();
-    _filePath = mdf.filePath();
+    _file_name = mdf.fileName();
+    _file_path = mdf.filePath();
 }
 
 MlsDataFile::~MlsDataFile()
@@ -23,17 +23,17 @@ MlsDataFile::~MlsDataFile()
 // getters
 string MlsDataFile::fileName() const
 {
-    return _fileName;
+    return _file_name;
 }
 
 string MlsDataFile::filePath() const
 {
-    return _filePath;
+    return _file_path;
 }
 
 string MlsDataFile::fullName() const
 {
-    return _filePath + _fileName;
+    return _file_path + _file_name;
 }
 
 MLSData MlsDataFile::readLastData()
@@ -56,11 +56,12 @@ MLSData MlsDataFile::readLastData()
             if (sym == '\n') {
                 fin.seekg(1, ios::cur);
             }
-            fin >> _data.init_seq >>
+            fin >> _data.initSeq >>
                    _data.polynominal >>
                    _data.length >>
                    _data.sequence >>
-                   _data.acf_peak_side_lobe;
+                   _data.acfSideLobesRatio >>
+                   _data.meritFactor;
             break;
         }
     }
@@ -72,14 +73,14 @@ MLSData MlsDataFile::readLastData()
 
 
 // setters
-void MlsDataFile::setFileName(const string &fileName)
+void MlsDataFile::setFileName(const string &file_name)
 {
-    _fileName = fileName;
+    _file_name = file_name;
 }
 
-void MlsDataFile::setFilePath(const string &filePath)
+void MlsDataFile::setFilePath(const string &file_path)
 {
-    _filePath = filePath;
+    _file_path = file_path;
 }
 
 void MlsDataFile::writeData(const MLSData &data)
@@ -87,11 +88,12 @@ void MlsDataFile::writeData(const MLSData &data)
     ofstream fout;
     fout.open(this->fullName(), ios::app);
 
-    fout << data.init_seq           << _sep <<
-            data.polynominal        << _sep <<
-            data.length             << _sep <<
-            data.sequence           << _sep <<
-            data.acf_peak_side_lobe << '\n';
+    fout << data.initSeq           << _sep <<
+            data.polynominal       << _sep <<
+            data.length            << _sep <<
+            data.sequence          << _sep <<
+            data.acfSideLobesRatio << _sep <<
+            data.meritFactor << '\n';
 
     fout.close();
 }
@@ -103,8 +105,8 @@ MlsDataFile &MlsDataFile::operator=(const MlsDataFile &mdf)
     if (this == &mdf) {
         return *this;
     }
-    _fileName = mdf.fileName();
-    _filePath = mdf.filePath();
+    _file_name = mdf.fileName();
+    _file_path = mdf.filePath();
 
     return *this;
 }

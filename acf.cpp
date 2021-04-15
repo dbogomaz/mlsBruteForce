@@ -1,39 +1,38 @@
 #include "acf.h"
 
-// constructors
+// ********** constructors **********
 Acf::Acf()
-    : _acf_peak_side_lobe(0)
+    : _acf_side_lobes_ratio(0.0)
+    , _merit_factor(0.0)
 {
     _value.clear();
 }
 
 Acf::Acf(const Acf &acf)
 {
-    _acf_peak_side_lobe = acf.acf_peak_side_lobe();
-}
-
-int32_t Acf::acf_peak_side_lobe() const
-{
-    return _acf_peak_side_lobe;
+    init(acf);
 }
 
 
-// operators overloading
-Acf &Acf::operator= (const Acf &acf)
-{
-    if(this == &acf) {
-        return *this;
-    }
-    _acf_peak_side_lobe = acf.acf_peak_side_lobe();
 
-    return *this;
-}
-
+// ********** getters **********
 vec32_t Acf::value() const
 {
     return _value;
 }
 
+double Acf::acfSideLobesRatio() const
+{
+    return _acf_side_lobes_ratio;
+}
+
+double Acf::meritFactor() const
+{
+    return _merit_factor;
+}
+
+
+// ********** setters **********
 void Acf::setValue(const vec32_t &value)
 {
     // получаем абсолютные значения
@@ -43,9 +42,23 @@ void Acf::setValue(const vec32_t &value)
 
     typedef vec32_t::const_iterator iterator;
     iterator it_0 = _value.begin(); // начало АКФ
-    iterator it_middle = _value.begin() + (_value.size() - 1) / 2 - 1; // левые боковые лепестки без максимума
+    iterator it_1 = _value.begin() + (_value.size() - 1) / 2 - 1; // левые боковой лепесток от максимума
+    iterator it_main = it_1 + 1; // главный лепесток
 
-    _acf_peak_side_lobe = 20 * log10(1.0 * *max_element(it_0, it_middle) / *(it_middle + 1));
+    _acf_side_lobes_ratio = 20 * log10(1.0 * *max_element(it_0, it_1) / *(it_1 + 1)); // уровень боковых лепестков в дБ
+}
+
+
+
+// ********** operators overloading **********
+Acf &Acf::operator= (const Acf &acf)
+{
+    if(this == &acf) {
+        return *this;
+    }
+    init(acf);
+
+    return *this;
 }
 
 std::ostream &operator<< (std::ostream &out, const Acf &acf)
@@ -56,10 +69,18 @@ std::ostream &operator<< (std::ostream &out, const Acf &acf)
         out << d << " ";
     }
     out << endl;
-    out << "PSL = " << acf.acf_peak_side_lobe();
+    out << "SLR = " << acf.acfSideLobesRatio();
+    out << endl;
+    out << "MF = " << acf.meritFactor();
     out << endl;
 
     return out;
 }
 
+void Acf::init(const Acf &acf)
+{
+    _value = acf.value();
+    _acf_side_lobes_ratio = acf.acfSideLobesRatio();
+    _merit_factor = acf.meritFactor();
+}
 
