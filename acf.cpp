@@ -80,7 +80,7 @@ std::ostream &operator<< (std::ostream &out, const Acf &acf)
         out << d << " ";
     }
     out << endl;
-    out << "SLR = " << acf.peakSideLobe();
+    out << "PSL = " << acf.peakSideLobe();
     out << endl;
     out << "MF = " << acf.meritFactor();
     out << endl;
@@ -88,10 +88,11 @@ std::ostream &operator<< (std::ostream &out, const Acf &acf)
     return out;
 }
 
+
+// ********** inside fucntion **********
 void Acf::init(const Acf &acf)
 {
     _value = acf.value();
     _peak_side_lobe = acf.peakSideLobe();
     _merit_factor = acf.meritFactor();
 }
-

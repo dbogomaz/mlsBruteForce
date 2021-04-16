@@ -36,6 +36,11 @@ public:
     MlsDataFile &operator= (const MlsDataFile &mdf);
     //std::ostream &operator<< (std::ostream &osr, MlsDataFile &mdf);
 
+    // inside functions
+private:
+    void init(const MlsDataFile &mdf);
+
+    // inside members
 private:
     string _file_name {""};
     string _file_path {""};

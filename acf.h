@@ -28,11 +28,11 @@ public:
     Acf &operator= (const Acf &acf);
     friend std::ostream &operator<< (std::ostream &out, const Acf &acf);
 
+    // inside fucntions
 private:
     void init(const Acf &acf);
 
-
-
+    // inside members
 private:
     vec32_t _value; // значения АКФ
     double _peak_side_lobe {0.0}; // уровень боковых лепестков
