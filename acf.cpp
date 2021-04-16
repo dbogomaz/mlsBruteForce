@@ -44,8 +44,7 @@ void Acf::setValue(const vec32_t &value)
 
     typedef vec32_t::const_iterator iterator;
     iterator it_0 = _value.begin(); // начало АКФ
-    iterator it_1 = _value.begin() + (_value.size() - 1) / 2 - 1; // левые от максимума боковой лепесток
-    iterator it_main = it_1 + 1; // главный лепесток
+    iterator it_1 = _value.begin() + (_value.size() - 1) / 2 - 1; // левый от максимума боковой лепесток
 
     _peak_side_lobe = 20 * log10(1.0 * *max_element(it_0, it_1) / *(it_1 + 1)); // уровень боковых лепестков в дБ
 
@@ -53,10 +52,7 @@ void Acf::setValue(const vec32_t &value)
     for (int i = 0; i < main_lobe_index; ++i) {
         _merit_factor += _value[i] * _value[i];
     }
-//    _merit_factor = pow(*it_main, 2) / _merit_factor;
-//    _merit_factor = *it_main * *it_main / _merit_factor;
-    _merit_factor = _value[main_lobe_index] * _value[main_lobe_index] / _merit_factor;
-
+    _merit_factor = _value[main_lobe_index] * _value[main_lobe_index] / (2 * _merit_factor);
 }
 
 
