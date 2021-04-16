@@ -60,7 +60,7 @@ MLSData MlsDataFile::readLastData()
                    _data.polynominal >>
                    _data.length >>
                    _data.sequence >>
-                   _data.acfSideLobesRatio >>
+                   _data.peakSideLobe >>
                    _data.meritFactor;
             break;
         }
@@ -88,12 +88,12 @@ void MlsDataFile::writeData(const MLSData &data)
     ofstream fout;
     fout.open(this->fullName(), ios::app);
 
-    fout << data.initSeq           << _sep <<
-            data.polynominal       << _sep <<
-            data.length            << _sep <<
-            data.sequence          << _sep <<
-            data.acfSideLobesRatio << _sep <<
-            data.meritFactor << '\n';
+    fout << data.initSeq      << _sep <<
+            data.polynominal  << _sep <<
+            data.length       << _sep <<
+            data.sequence     << _sep <<
+            data.peakSideLobe << _sep <<
+            data.meritFactor  << '\n';
 
     fout.close();
 }

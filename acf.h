@@ -18,7 +18,7 @@ public:
 
     // getters
     vec32_t value() const;
-    double acfSideLobesRatio() const;
+    double peakSideLobe() const;
     double meritFactor() const;
 
     // setters
@@ -35,7 +35,7 @@ private:
 
 private:
     vec32_t _value; // значения АКФ
-    double _acf_side_lobes_ratio {0.0}; // уровень боковых лепестков
+    double _peak_side_lobe {0.0}; // уровень боковых лепестков
     double _merit_factor {0.0}; // отношение энергии главного лепестка к суммарной энергии всех боковых лепестков
 
 };

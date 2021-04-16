@@ -2,7 +2,7 @@
 
 // ********** constructors **********
 Acf::Acf()
-    : _acf_side_lobes_ratio(0.0)
+    : _peak_side_lobe(0.0)
     , _merit_factor(0.0)
 {
     _value.clear();
@@ -21,9 +21,9 @@ vec32_t Acf::value() const
     return _value;
 }
 
-double Acf::acfSideLobesRatio() const
+double Acf::peakSideLobe() const
 {
-    return _acf_side_lobes_ratio;
+    return _peak_side_lobe;
 }
 
 double Acf::meritFactor() const
@@ -40,12 +40,23 @@ void Acf::setValue(const vec32_t &value)
         _value.push_back(abs(d));
     }
 
+    int main_lobe_index = (_value.size() - 1) / 2; // индекс главного лепестка
+
     typedef vec32_t::const_iterator iterator;
     iterator it_0 = _value.begin(); // начало АКФ
-    iterator it_1 = _value.begin() + (_value.size() - 1) / 2 - 1; // левые боковой лепесток от максимума
+    iterator it_1 = _value.begin() + (_value.size() - 1) / 2 - 1; // левые от максимума боковой лепесток
     iterator it_main = it_1 + 1; // главный лепесток
 
-    _acf_side_lobes_ratio = 20 * log10(1.0 * *max_element(it_0, it_1) / *(it_1 + 1)); // уровень боковых лепестков в дБ
+    _peak_side_lobe = 20 * log10(1.0 * *max_element(it_0, it_1) / *(it_1 + 1)); // уровень боковых лепестков в дБ
+
+    _merit_factor = 0;
+    for (int i = 0; i < main_lobe_index; ++i) {
+        _merit_factor += _value[i] * _value[i];
+    }
+//    _merit_factor = pow(*it_main, 2) / _merit_factor;
+//    _merit_factor = *it_main * *it_main / _merit_factor;
+    _merit_factor = _value[main_lobe_index] * _value[main_lobe_index] / _merit_factor;
+
 }
 
 
@@ -69,7 +80,7 @@ std::ostream &operator<< (std::ostream &out, const Acf &acf)
         out << d << " ";
     }
     out << endl;
-    out << "SLR = " << acf.acfSideLobesRatio();
+    out << "SLR = " << acf.peakSideLobe();
     out << endl;
     out << "MF = " << acf.meritFactor();
     out << endl;
@@ -80,7 +91,7 @@ std::ostream &operator<< (std::ostream &out, const Acf &acf)
 void Acf::init(const Acf &acf)
 {
     _value = acf.value();
-    _acf_side_lobes_ratio = acf.acfSideLobesRatio();
+    _peak_side_lobe = acf.peakSideLobe();
     _merit_factor = acf.meritFactor();
 }
 

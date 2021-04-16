@@ -12,7 +12,7 @@ struct MLSData
     uint32_t polynominal {0}; // полином
     uint16_t length {0}; // длина последовательности
     uint32_t sequence {0}; // полученная последовательность
-    double acfSideLobesRatio {0}; // уровень боковых лепестков АКФ
+    double peakSideLobe {0}; // уровень боковых лепестков АКФ
     double meritFactor {0}; // уровень боковых лепестков АКФ
 };
 
