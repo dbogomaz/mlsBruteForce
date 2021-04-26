@@ -10,7 +10,7 @@ Acf::Acf()
 
 Acf::Acf(const Acf &acf)
 {
-    init(acf);
+    initialize(acf);
 }
 
 
@@ -63,7 +63,7 @@ Acf &Acf::operator= (const Acf &acf)
     if(this == &acf) {
         return *this;
     }
-    init(acf);
+    initialize(acf);
 
     return *this;
 }
@@ -86,7 +86,7 @@ std::ostream &operator<< (std::ostream &out, const Acf &acf)
 
 
 // ********** inside fucntion **********
-void Acf::init(const Acf &acf)
+void Acf::initialize(const Acf &acf)
 {
     _value = acf.value();
     _peak_side_lobe = acf.peakSideLobe();

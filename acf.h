@@ -18,8 +18,8 @@ public:
 
     // getters
     vec32_t value() const;
-    double peakSideLobe() const;
-    double meritFactor() const;
+    double  peakSideLobe() const;
+    double  meritFactor() const;
 
     // setters
     void setValue(const vec32_t &value);
@@ -30,13 +30,13 @@ public:
 
     // inside fucntions
 private:
-    void init(const Acf &acf);
+    void initialize(const Acf &acf);
 
     // inside members
 private:
-    vec32_t _value; // значения АКФ
-    double _peak_side_lobe {0.0}; // уровень боковых лепестков
-    double _merit_factor {0.0}; // отношение энергии главного лепестка к суммарной энергии всех боковых лепестков
+    vec32_t _value;                // значения АКФ
+    double  _peak_side_lobe {0.0}; // уровень боковых лепестков
+    double  _merit_factor {0.0};   // отношение энергии главного лепестка к суммарной энергии всех боковых лепестков
 
 };
 

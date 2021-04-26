@@ -9,9 +9,9 @@ MlsDataFile::MlsDataFile()
 
 }
 
-MlsDataFile::MlsDataFile(const MlsDataFile &mdf)
+MlsDataFile::MlsDataFile(const MlsDataFile &mls_data_file)
 {
-    init(mdf);
+    initialize(mls_data_file);
 }
 
 MlsDataFile::~MlsDataFile()
@@ -85,7 +85,7 @@ void MlsDataFile::setFilePath(const string &file_path)
 void MlsDataFile::writeData(const MLSData &data)
 {
     ofstream fout;
-    fout.open(this->fullName(), ios::app);
+    fout.open(this->fullName(), ios::app); // запись в конец файла
 
     fout << data.initSeq      << _sep <<
             data.polynominal  << _sep <<
@@ -99,20 +99,20 @@ void MlsDataFile::writeData(const MLSData &data)
 
 
 // ********** overload operations **********
-MlsDataFile &MlsDataFile::operator=(const MlsDataFile &mdf)
+MlsDataFile &MlsDataFile::operator=(const MlsDataFile &mls_data_file)
 {
-    if (this == &mdf) {
+    if (this == &mls_data_file) {
         return *this;
     }
-    init(mdf);
+    initialize(mls_data_file);
 
     return *this;
 }
 
 
 // ********** inside functions **********
-void MlsDataFile::init(const MlsDataFile &mdf)
+void MlsDataFile::initialize(const MlsDataFile &mls_data_file)
 {
-    _file_name = mdf.fileName();
-    _file_path = mdf.filePath();
+    _file_name = mls_data_file.fileName();
+    _file_path = mls_data_file.filePath();
 }

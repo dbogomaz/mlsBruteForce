@@ -18,13 +18,13 @@ class MlsDataFile
 public:
     // construtors (destructors)
     MlsDataFile();
-    MlsDataFile(const MlsDataFile &mdf); // constructor of copy
+    MlsDataFile(const MlsDataFile &mls_data_file); // constructor of copy
     ~MlsDataFile();
 
     // getters
-    string fileName() const;
-    string filePath() const;
-    string fullName() const;
+    string  fileName() const;
+    string  filePath() const;
+    string  fullName() const;
     MLSData readLastData();
 
     // setters
@@ -38,14 +38,14 @@ public:
 
     // inside functions
 private:
-    void init(const MlsDataFile &mdf);
+    void initialize(const MlsDataFile &mdf);
 
     // inside members
 private:
-    string _file_name {""};
-    string _file_path {""};
-    const char _sep {' '}; // separator разделитель данных в файле (например пробел)
-    MLSData _data; // структура для хранения промежуточных данных (чтобы каждый раз при чтении память не выделять)
+    string     _file_name {""};
+    string     _file_path {""};
+    const char _sep {' '};     // separator разделитель данных в файле (например пробел)
+    MLSData    _data;          // структура для хранения промежуточных данных (чтобы каждый раз при чтении память не выделять)
 
 };
 
