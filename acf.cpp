@@ -1,6 +1,7 @@
 #include "acf.h"
 
-// ********** constructors **********
+// constructors
+// ********************************************************************************
 Acf::Acf()
     : _peak_side_lobe(0.0)
     , _merit_factor(0.0)
@@ -15,7 +16,8 @@ Acf::Acf(const Acf &acf)
 
 
 
-// ********** getters **********
+// getters
+// ********************************************************************************
 vec32_t Acf::value() const
 {
     return _value;
@@ -32,7 +34,8 @@ double Acf::meritFactor() const
 }
 
 
-// ********** setters **********
+// setters
+// ********************************************************************************
 void Acf::setValue(const vec32_t &value)
 {
     // получаем абсолютные значения
@@ -57,7 +60,8 @@ void Acf::setValue(const vec32_t &value)
 
 
 
-// ********** operators overloading **********
+// operators overloading
+// ********************************************************************************
 Acf &Acf::operator= (const Acf &acf)
 {
     if(this == &acf) {
@@ -85,7 +89,8 @@ std::ostream &operator<< (std::ostream &out, const Acf &acf)
 }
 
 
-// ********** inside fucntion **********
+// inside fucntion
+// ********************************************************************************
 void Acf::initialize(const Acf &acf)
 {
     _value = acf.value();

@@ -1,6 +1,7 @@
 #include "mlsdatafile.h"
 
-// ********** constutions **********
+// constutions
+// ********************************************************************************
 MlsDataFile::MlsDataFile()
     : _file_name("")
     , _file_path("")
@@ -19,7 +20,9 @@ MlsDataFile::~MlsDataFile()
 //    cout << "Деструктор " << this->fileName() << endl;
 }
 
-// ********** getters **********
+
+// getters
+// ********************************************************************************
 string MlsDataFile::fileName() const
 {
     return _file_name;
@@ -71,7 +74,8 @@ MLSData MlsDataFile::readLastData()
 }
 
 
-// ********** setters **********
+// setters
+// ********************************************************************************
 void MlsDataFile::setFileName(const string &file_name)
 {
     _file_name = file_name;
@@ -98,7 +102,8 @@ void MlsDataFile::writeData(const MLSData &data)
 }
 
 
-// ********** overload operations **********
+// overload operations
+// ********************************************************************************
 MlsDataFile &MlsDataFile::operator=(const MlsDataFile &mls_data_file)
 {
     if (this == &mls_data_file) {
@@ -110,7 +115,8 @@ MlsDataFile &MlsDataFile::operator=(const MlsDataFile &mls_data_file)
 }
 
 
-// ********** inside functions **********
+// inside functions
+// ********************************************************************************
 void MlsDataFile::initialize(const MlsDataFile &mls_data_file)
 {
     _file_name = mls_data_file.fileName();
