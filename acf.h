@@ -7,7 +7,7 @@
 #include <vector>
 #include <algorithm>
 
-typedef std::vector<int32_t> vec32_t;
+#include "defines.h"
 
 class Acf
 {

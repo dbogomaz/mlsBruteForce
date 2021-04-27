@@ -10,6 +10,7 @@ SOURCES += \
 
 HEADERS += \
     acf.h \
+    defines.h \
     mlsdata.h \
     mlsdatafile.h
 
