@@ -34,6 +34,7 @@ double Acf::meritFactor() const
 }
 
 
+
 // setters
 // ********************************************************************************
 void Acf::setValue(const vec32_t &value)

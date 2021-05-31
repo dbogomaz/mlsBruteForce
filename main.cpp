@@ -7,6 +7,7 @@
 #include "acf.h"
 #include "mlsdatafile.h"
 #include "mlsdata.h"
+#include "corr.h"
 
 using namespace std;
 
@@ -21,12 +22,24 @@ int main() {
                 -15,  4,  3, 18,-11,  4, 11,  10, -3, -4,
                  11, 14,  1,-12, 19, 22, 21,  24, 15,  6, 9};
 
-//    cout << v1.size() << endl;
+    vec32_t v2 {0, 0, 0, 1, 0, 0, 1};
 
-    Acf a;
-    a.setValue(v1);
+//    Acf a;
+//    a.setValue(v1);
+//    cout << a << endl;
 
-    cout << a;
+//    cout << "main corr()" << endl;
+//    for (auto e : corr(v2)) {
+//        cout << e << ' ';
+//    }
+//    cout << endl;
+
+    cout << "main corr1()" << endl;
+//    for (auto e : corr1(v2)) {
+//        cout << e << ' ';
+//    }
+//    cout << endl;
+    corr1(v2);
 
     return 0;
 }
