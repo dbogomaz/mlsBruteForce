@@ -34,11 +34,9 @@ int main() {
 //    }
 //    cout << endl;
 
+//    cout << "main corr()" << endl;
+//    corr(v2);
     cout << "main corr1()" << endl;
-//    for (auto e : corr1(v2)) {
-//        cout << e << ' ';
-//    }
-//    cout << endl;
     corr1(v2);
 
     return 0;
