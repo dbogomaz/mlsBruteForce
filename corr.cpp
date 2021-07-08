@@ -3,39 +3,6 @@
 #include <iostream>
 
 
-// вывод содержимого вектора в cout
-void coutVec32_t(vec32_t vec)
-{
-    using namespace std;
-    char tabSymbol = ' '; // символ табуляции
-    int tabNumber = 3; // количество символов табуляции (дб не меньше одного)
-
-    for (auto d: vec) {
-        int i = 0;
-        if (d < 0) {
-            i++;
-        }
-        for (; i < tabNumber; ++i) {
-            cout << tabSymbol;
-        }
-        cout << d;
-    }
-}
-
-// поэлементное умножение вектора на целое число
-void vec32_tMultiplication(vec32_t &vec, int multiplier)
-{
-    vec32_t::iterator it = vec.begin();
-
-    while (it != vec.end()) {
-//        std::cout << *it * 2 << " ";
-        *it *= multiplier;
-        it++;
-    }
-//    std::cout << std::endl;
-
-}
-
 // рассчет АКФ из модели в MatLab
 vec32_t corr(vec32_t seq)
 {
@@ -128,4 +95,38 @@ vec32_t corr1(vec32_t seq)
     cout << endl;
 
     return out;
+}
+
+// поэлементное умножение вектора на целое число
+void vec32_tMultiplication(vec32_t &vec, int multiplier)
+{
+    vec32_t::iterator it = vec.begin();
+
+    while (it != vec.end()) {
+//        std::cout << *it * 2 << " ";
+        *it *= multiplier;
+        it++;
+    }
+//    std::cout << std::endl;
+
+}
+
+
+// вывод содержимого вектора в cout
+void coutVec32_t(vec32_t vec)
+{
+    using namespace std;
+    char tabSymbol = ' '; // символ табуляции
+    int tabNumber = 3; // количество символов табуляции (дб не меньше одного)
+
+    for (auto d: vec) {
+        int i = 0;
+        if (d < 0) {
+            i++;
+        }
+        for (; i < tabNumber; ++i) {
+            cout << tabSymbol;
+        }
+        cout << d;
+    }
 }
