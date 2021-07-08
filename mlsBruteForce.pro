@@ -4,12 +4,14 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += \
+        ../../QtProjects/!BClasses/Btimer/btimer.cpp \
         acf.cpp \
         corr.cpp \
         mlsdatafile.cpp \
         main.cpp
 
 HEADERS += \
+    ../../QtProjects/!BClasses/Btimer/btimer.h \
     acf.h \
     corr.h \
     defines.h \

@@ -9,9 +9,13 @@
 #include "mlsdata.h"
 #include "corr.h"
 
+#include "/Users/bgm/QtProjects/!BClasses/Btimer/btimer.h"
+
 using namespace std;
 
 int main() {
+
+    BTimer fullTime;
 
     vec32_t v {1, 0, -3, 2, -1, -2, 7, -2, -1, 2, -3, 0, 1};
 
@@ -23,21 +27,29 @@ int main() {
                  11, 14,  1,-12, 19, 22, 21,  24, 15,  6, 9};
 
     vec32_t v2 {0, 0, 0, 1, 0, 0, 1};
+    vec32_t v3 {0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, };
 
-//    Acf a;
-//    a.setValue(v1);
-//    cout << a << endl;
+    BTimer t;
+    double tSumma = 0.0;
+    double tSumma1 = 0.0;
 
-//    cout << "main corr()" << endl;
-//    for (auto e : corr(v2)) {
-//        cout << e << ' ';
-//    }
-//    cout << endl;
+    int  iterationsNumber = 10000000;
 
-//    cout << "main corr()" << endl;
-//    corr(v2);
-    cout << "main corr1()" << endl;
-    corr1(v2);
+    for (int i = 0; i < iterationsNumber; ++i) {
+        t.reset();
+        corr(v3);
+        tSumma += t.elapsed();
+
+        t.reset();
+        corr1(v3);
+        tSumma1 += t.elapsed();
+    }
+
+    cout << "corr()   - " << tSumma << endl;
+    cout << "corr1()  - " << tSumma1 << endl;
+    cout << endl;
+    cout << "fullTime - " << fullTime.elapsed() << endl;
+
 
     return 0;
 }
