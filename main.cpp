@@ -17,7 +17,9 @@ int main() {
 
     BTimer fullTime;
 
-    vec32_t v {1, 0, -3, 2, -1, -2, 7, -2, -1, 2, -3, 0, 1};
+    vec32_t v   {1, 0, -3, 2, -1, -2, 7, -2, -1, 2, -3, 0, 1};
+    vec32_t v10 {7, -2, -1, 2, -3, 0, 1};
+//    vec32_t v10 {0, 1, 2, 3, 4, 5, 6};
 
     vec32_t v1 {  9,  6, 15, 24, 21, 22, 19, -12,  1, 14,
                  11, -4, -3, 10, 11,  4,-11,  18,  3,  4,
@@ -27,28 +29,32 @@ int main() {
                  11, 14,  1,-12, 19, 22, 21,  24, 15,  6, 9};
 
     vec32_t v2 {0, 0, 0, 1, 0, 0, 1};
-    vec32_t v3 {0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, };
+    vec32_t v3 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1};
 
-    BTimer t;
-    double tSumma = 0.0;
-    double tSumma1 = 0.0;
+    Acf a;
+    a.setValue(v10);
+    cout << a << endl;
 
-    int  iterationsNumber = 10000000;
 
-    for (int i = 0; i < iterationsNumber; ++i) {
-        t.reset();
-        corr(v3);
-        tSumma += t.elapsed();
+//    BTimer t;
+//    double tSumma = 0.0;
+//    double tSumma1 = 0.0;
 
-        t.reset();
-        corr1(v3);
-        tSumma1 += t.elapsed();
-    }
+//    int  iterationsNumber = 1;
 
-    cout << "corr()   - " << tSumma << endl;
-    cout << "corr1()  - " << tSumma1 << endl;
-    cout << endl;
-    cout << "fullTime - " << fullTime.elapsed() << endl;
+//    for (int i = 0; i < iterationsNumber; ++i) {
+//        t.reset();
+//        corr(v3);
+//        tSumma += t.elapsed();
+////        t.reset();
+////        corr1(v2);
+////        tSumma1 += t.elapsed();
+//    }
+
+//    cout << "corr()   - " << tSumma << endl;
+////    cout << "corr1()  - " << tSumma1 << endl;
+//    cout << endl;
+//    cout << "fullTime - " << fullTime.elapsed() << endl;
 
 
     return 0;

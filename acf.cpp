@@ -39,24 +39,23 @@ double Acf::meritFactor() const
 // ********************************************************************************
 void Acf::setValue(const vec32_t &value)
 {
+    using namespace std;
+
     // получаем абсолютные значения
     for (auto d : value) {
         _value.push_back(abs(d));
     }
 
-    int main_lobe_index = (_value.size() - 1) / 2; // индекс главного лепестка
+    // считаем _peak_side_lobe
+    _peak_side_lobe = 20 * log10(static_cast<double>(*max_element(_value.begin() + 1, _value.end())) / _value[0]); // уровень боковых лепестков в дБ
 
-    typedef vec32_t::const_iterator iterator;
-    iterator it_0 = _value.begin(); // начало АКФ
-    iterator it_1 = _value.begin() + (_value.size() - 1) / 2 - 1; // левый от максимума боковой лепесток
-
-    _peak_side_lobe = 20 * log10(1.0 * *max_element(it_0, it_1) / *(it_1 + 1)); // уровень боковых лепестков в дБ
-
+    // считаем _merit_factor
     _merit_factor = 0;
-    for (int i = 0; i < main_lobe_index; ++i) {
+    for (vec32_t::size_type i = 1; i < _value.size(); i++) {
         _merit_factor += _value[i] * _value[i];
     }
-    _merit_factor = _value[main_lobe_index] * _value[main_lobe_index] / (2 * _merit_factor);
+    _merit_factor *= 2;
+    _merit_factor = _value[0] * _value[0] / _merit_factor;
 }
 
 
@@ -77,13 +76,14 @@ std::ostream &operator<< (std::ostream &out, const Acf &acf)
 {
     using namespace std;
 
+    out << "AKF = ";
     for (auto d : acf.value()) {
         out << d << " ";
     }
     out << endl;
     out << "PSL = " << acf.peakSideLobe();
     out << endl;
-    out << "MF = " << acf.meritFactor();
+    out << " MF = " << acf.meritFactor();
     out << endl;
 
     return out;
