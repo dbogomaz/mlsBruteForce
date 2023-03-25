@@ -1,7 +1,9 @@
-// Класс расчета АКФ
+// Функция расчета АКФ
 
 #ifndef CORR_H
 #define CORR_H
+
+#include <iostream>
 
 #include "defines.h"
 //#include <cmath>
